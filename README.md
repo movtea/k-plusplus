@@ -16,6 +16,9 @@
 k-plusplus/
 |-- src/
 |   |-- main.cpp
+|   |-- nsrlRepository/
+|   |   |-- nsrlRepository.cpp
+|   |   |-- nsrlRepository.h
 |   |-- +moduleNew/
 |   |   |-- +moduleNew.cpp
 |   |   |-- +moduleNew.h
@@ -63,3 +66,25 @@ k-plusplus/
 За подробностями models/fileSchema.h или к архитектору)
 
 ## Описание модулей
+
+### Модуль для работы с базой данных NSRL.
+
+Инструкция использования:
+
+```c++
+    // Создать объект класса
+    NSRLRepository nsrlRepo;
+
+    // Проверить открылось или нет
+    if (nsrlRepo.GetIsOpen())
+    {
+        // Работа с БД
+        cout << "Оно открыто))))\n";
+        // Проверить если есть хеш sha1 в базе NSRL
+                nsrlRepo.IsHashInDB("7691C372B3C494671218EE5C8C56A6D7C53815B7");
+    }
+    else
+    {
+        // Если ошибка открытия
+    }
+```
