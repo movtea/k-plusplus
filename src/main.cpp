@@ -13,10 +13,6 @@ int main(int argc, char const *argv[])
     NSRLRepository nsrlRepo;
     File testfile;
 
-    cout << testfile.name << "1" << endl;
-    testfile.name = "dshfjsadk";
-    cout << testfile.name;
-
     if (nsrlRepo.GetIsOpen())
     {
         cout << "Оно открыто))))\n";
