@@ -1,0 +1,26 @@
+{
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "MAIN",
+			"command": "g++",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${workspaceFolder}/src/main.cpp",
+				"${workspaceFolder}/build/sqlite3.o",
+				"-o",
+				"${workspaceFolder}/build/k-pp"
+			],
+			"options": {
+				"cwd": "${workspaceFolder}"
+			},
+			"problemMatcher": ["$gcc"],
+			"group": {
+				"kind": "build"
+			},
+			"detail": "Скомпилировать и запустить MAIN"
+		}
+	],
+	"version": "2.0.0"
+}

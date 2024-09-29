@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"string": "cpp",
+		"format": "cpp",
+		"vector": "cpp",
+		"memory": "cpp",
+		"optional": "cpp",
+		"string_view": "cpp",
+		"system_error": "cpp",
+		"text_encoding": "cpp",
+		"variant": "cpp"
+	}
+}
