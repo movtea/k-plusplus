@@ -10,20 +10,15 @@ NSRLRepository::NSRLRepository()
 {
     int openResult = sqlite3_open(
         "src/nsrlRepository/test.db", // путь к файлу бд
-        &Database);                   // открытие бд и передача имени бд open16 - имя указывается в кодировке
+        &Database);                   // открытие бд и передача имени бд open - имя указывается в кодировке
 
     if (openResult != SQLITE_OK)
     {
-        isOpen = false;
-        cout << "Ошибка: " + to_string(openResult) << endl;
-    }
-    else
-    {
-        isOpen = true;
+        throw OpenDBException(openResult);
     }
 }
 
-bool NSRLRepository::IsHashInDB(string hash)
+bool NSRLRepository::IsHashInDB(FilePtr File)
 {
     sqlite3_stmt *pStatement;
     // 7691C372B3C494671218EE5C8C56A6D7C53815B7
@@ -32,8 +27,8 @@ bool NSRLRepository::IsHashInDB(string hash)
     */
 
     int execResult = sqlite3_prepare_v2(Database,
-                                        ("SELECT count(*) FROM FILE WHERE sha1 = \"" + hash + "\"; ").c_str(), // запрос
-                                        -1,                                                                    // длина SQL-запроса в символах
+                                        ("SELECT count(*) FROM FILE WHERE sha1 = \"" + File->hash_sha1 + "\"; ").c_str(), // запрос
+                                        -1,                                                                               // длина SQL-запроса в символах
                                         &pStatement,
                                         NULL);
 
