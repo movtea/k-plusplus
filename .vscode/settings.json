@@ -8,6 +8,8 @@
 		"string_view": "cpp",
 		"system_error": "cpp",
 		"text_encoding": "cpp",
-		"variant": "cpp"
+		"variant": "cpp",
+		"new": "cpp",
+		"iostream": "cpp"
 	}
 }

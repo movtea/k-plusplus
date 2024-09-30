@@ -2,17 +2,23 @@
 #ifndef NSRLREPO_H_INCLUDED
 #define NSRLREPO_H_INCLUDED
 
+#include "../../models/fileSchema.h"
+
 class NSRLRepository
 {
 private:
     sqlite3 *Database;
-    bool isOpen = false;
 
 public:
+    class OpenDBException // Для проброса ошибок открытия БД
+    {
+    public:
+        int error;
+        OpenDBException(int Error) { error = Error; };
+    };
     NSRLRepository();
     ~NSRLRepository() { sqlite3_close(Database); }; // закрытие бд
-    bool IsHashInDB(string hash);
-    bool GetIsOpen() const { return isOpen; };
+    bool IsHashInDB(FilePtr File);
 };
 
 typedef NSRLRepository *NSRLRepositoryPtr; // указатель на репозиторий
