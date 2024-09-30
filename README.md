@@ -72,19 +72,26 @@ k-plusplus/
 Инструкция использования:
 
 ```c++
-    // Создать объект класса
+
+try
+{
+    // Создание объекта репозитория
     NSRLRepository nsrlRepo;
 
-    // Проверить открылось или нет
-    if (nsrlRepo.GetIsOpen())
-    {
-        // Работа с БД
-        cout << "Оно открыто))))\n";
-        // Проверить если есть хеш sha1 в базе NSRL
-                nsrlRepo.IsHashInDB("7691C372B3C494671218EE5C8C56A6D7C53815B7");
+    // Создание объекта файла
+    File testFile;
+    testFile.name = "Test";
+    testFile.hash_sha1 = "no";
+
+    if (nsrlRepo.IsHashInDB(&testFile)){
+        cout << "Если есть файл в бд"
+    } else {
+        cout << "Если нет файла в бд"
     }
-    else
-    {
-        // Если ошибка открытия
-    }
+}
+catch (const NSRLRepository::OpenDBException &ex) // Если произошло исключение при открытии БД
+{
+    cout << "Ошибка открытия БД SQLite № " << ex.error << endl;
+    return 1;
+}
 ```
