@@ -12,7 +12,7 @@ bool Test_NSRLRepo_IsHashInDB_1(NSRLRepositoryPtr nsrlRepo)
     File testFile;
     testFile.hash_sha1 = "7691C372B3C494671218EE5C8C56A6D7C53815B7";
 
-    return nsrlRepo->IsHashInDB(&testFile) == true;
+    return (nsrlRepo->IsHashInDB(&testFile) == true);
 }
 
 bool Test_NSRLRepo_IsHashInDB_2(NSRLRepositoryPtr nsrlRepo)
@@ -20,7 +20,7 @@ bool Test_NSRLRepo_IsHashInDB_2(NSRLRepositoryPtr nsrlRepo)
     File testFile;
     testFile.hash_sha1 = "no";
 
-    return nsrlRepo->IsHashInDB(&testFile) == false;
+    return (nsrlRepo->IsHashInDB(&testFile) == false);
 }
 
 bool Test_NSRLRepo_IsHashInDB_3(NSRLRepositoryPtr nsrlRepo)
@@ -28,7 +28,7 @@ bool Test_NSRLRepo_IsHashInDB_3(NSRLRepositoryPtr nsrlRepo)
     File testFile;
     testFile.name = "file";
 
-    return nsrlRepo->IsHashInDB(&testFile) == false;
+    return (nsrlRepo->IsHashInDB(&testFile) == false);
 }
 
 int main(int argc, char const *argv[])
