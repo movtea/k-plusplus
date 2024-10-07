@@ -95,3 +95,18 @@ catch (const NSRLRepository::OpenDBException &ex) // Если произошло
     return 1;
 }
 ```
+### Модуль для обхода заданной директории.
+
+Инструкция использования:
+
+```c++
+vector<FilePtr> filename  = dir("/path/to/dir");
+
+for(int i = 0; i < filename.size(); i++)
+{
+    cout << filename[i]->name<< endl;
+    cout << filename[i]->path<< endl;
+}
+
+filename.clear();
+```

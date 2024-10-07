@@ -1,5 +1,7 @@
 #ifndef FILESCHEMA_H_INCLUDED
 #define FILESCHEMA_H_INCLUDED
+#include <string>
+using namespace std;
 
 struct File
 {
