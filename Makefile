@@ -15,3 +15,12 @@ sqlite3.o: ./lib/sqlite3.c
 
 testNSRL: sqlite3.o nsrlRepository.o
 	g++ ./tests/unit_test_nsrlRepository.cpp ./build/nsrlRepository.o ./build/sqlite3.o -o build/testNSRL
+
+dir.o: 
+	g++ -c ./src/getFileFromDir/getFileFromDir.cpp -o build/dir
+
+testDIR: dir.o
+	g++ ./tests/unit_test_dir.cpp ./build/dir -o build/testDIR
+
+runTestDIR: testDIR
+	./build/testDIR
