@@ -6,11 +6,11 @@ using namespace std;
 
 #include "nsrlRepository.h"
 
-NSRLRepository::NSRLRepository()
+NSRLRepository::NSRLRepository(string path)
 {
     int openResult = sqlite3_open(
-        "src/nsrlRepository/test.db", // путь к файлу бд
-        &Database);                   // открытие бд и передача имени бд open - имя указывается в кодировке
+        path.c_str(), // путь к файлу бд
+        &Database);   // открытие бд и передача имени бд open - имя указывается в кодировке
 
     if (openResult != SQLITE_OK)
     {
