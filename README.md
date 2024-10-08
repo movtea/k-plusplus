@@ -95,6 +95,7 @@ catch (const NSRLRepository::OpenDBException &ex) // Если произошло
     return 1;
 }
 ```
+
 ### Модуль для обхода заданной директории.
 
 Инструкция использования:
@@ -110,3 +111,12 @@ for(int i = 0; i < filename.size(); i++)
 
 filename.clear();
 ```
+
+### Модуль для получения хеш с помощью cryptopp.
+
+Перед запуском нужно скомпилить статическую библиотеку.
+
+1. Скачать саму библиотеку
+   `git clone https://github.com/weidai11/cryptopp.git`
+2. В директории скаченной библиотеки `make`
+3. Переместить файл libcryptopp.a по пути <проект>/lib/cryptopp/libcryptopp.a
