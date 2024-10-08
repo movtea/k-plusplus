@@ -3,7 +3,7 @@
 		{
 			"type": "cppbuild",
 			"label": "C/C++: g++ build active file",
-			"command": "/usr/lib64/ccache/g++",
+			"command": "g++",
 			"args": [
 				"-fdiagnostics-color=always",
 				"-g",
@@ -12,7 +12,9 @@
 				"${workspaceFolder}/src/getFileFromDir/getFileFromDir.cpp",
 				"${workspaceFolder}/src/nsrlRepository/nsrlRepository.cpp",
 				"-o",
-				"${workspaceFolder}/build//${fileBasenameNoExtension}"
+				"${workspaceFolder}/build//${fileBasenameNoExtension}",
+				"-L${workspaceFolder}/lib/cryptopp/",
+				"-l:libcryptopp.a"
 			],
 			"options": {
 				"cwd": "${workspaceFolder}/build/"
