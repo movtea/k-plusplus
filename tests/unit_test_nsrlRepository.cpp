@@ -38,7 +38,7 @@ int main(int argc, char const *argv[])
     //! Разобраться с пространством имён
     try
     {
-        NSRLRepository nsrlRepo;
+        NSRLRepository nsrlRepo = NSRLRepository("../src/nsrlRepository/test.db");
         cout << "Тест функции IsHashInDB №1 " << ((Test_NSRLRepo_IsHashInDB_1(&nsrlRepo)) ? "Пройден" : "Не пройден") << endl;
         cout << "Тест функции IsHashInDB №2 " << ((Test_NSRLRepo_IsHashInDB_2(&nsrlRepo)) ? "Пройден" : "Не пройден") << endl;
         cout << "Тест функции IsHashInDB №3 " << ((Test_NSRLRepo_IsHashInDB_3(&nsrlRepo)) ? "Пройден" : "Не пройден") << endl;

@@ -16,7 +16,7 @@ public:
         int error;
         OpenDBException(int Error) { error = Error; };
     };
-    NSRLRepository();
+    NSRLRepository(string path);
     ~NSRLRepository() { sqlite3_close(Database); }; // закрытие бд
     bool IsHashInDB(FilePtr File);
 };

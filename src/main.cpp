@@ -10,7 +10,7 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
     // setlocale(LC_ALL, "Russian");
-    NSRLRepository nsrlRepo;
+    NSRLRepository nsrlRepo = NSRLRepository("./nsrlRepository/test.db");
     File testfile;
     testfile.name = "Test.txt";
     testfile.path = "/home/CLionProjects/k-plusplus/models/fileSchema.h";

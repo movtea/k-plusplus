@@ -11,7 +11,7 @@ nsrlRepository.o: ./src/nsrlRepository/nsrlRepository.cpp
 
 
 sqlite3.o: ./lib/sqlite3.c
-	gcc -c ./lib/sqlite3.c -o build/sqlite3.o
+	gcc -c ./lib/sqlite/sqlite3.c -o build/sqlite3.o
 
 testNSRL: sqlite3.o nsrlRepository.o
 	g++ ./tests/unit_test_nsrlRepository.cpp ./build/nsrlRepository.o ./build/sqlite3.o -o build/testNSRL
