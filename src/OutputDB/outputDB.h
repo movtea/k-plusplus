@@ -2,6 +2,7 @@
 #define OUTPUT_DB_H
 
 #include "../../lib/sqlite3/sqlite3.h"
+#include "../../models/fileSchema.h"
 #include <iostream>
 
 using namespace std;
@@ -29,5 +30,6 @@ class OutputDB
             sqlite3_exec(DB,create_unknown_table.c_str(),nullptr,nullptr,&errMsg);
             cout << errMsg << "\n";
         };
+        void FillTheDB(FilePtr ourfile);
 };
 #endif //OUTPUT_DB_H
