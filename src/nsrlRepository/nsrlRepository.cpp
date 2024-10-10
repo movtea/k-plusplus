@@ -18,16 +18,16 @@ NSRLRepository::NSRLRepository(string path)
     }
 }
 
-bool NSRLRepository::IsHashInDB(FilePtr File)
+void NSRLRepository::IsHashInDB(FilePtr file)
 {
     sqlite3_stmt *pStatement;
-    // 7691C372B3C494671218EE5C8C56A6D7C53815B7
+    // 7691C372B3C494671218EE5C8C56A6D7C53815B7s
     /*
         SELECT count(*) FROM FILE WHERE sha1 = "7691C372B3C494671218EE5C8C56A6D7C53815B7";
     */
 
     int execResult = sqlite3_prepare_v2(Database,
-                                        ("SELECT count(*) FROM FILE WHERE sha1 = \"" + File->hash_sha1 + "\"; ").c_str(), // запрос
+                                        ("SELECT count(*) FROM FILE WHERE sha1 = \"" + file->hash_sha1 + "\"; ").c_str(), // запрос
                                         -1,                                                                               // длина SQL-запроса в символах
                                         &pStatement,
                                         NULL);
@@ -40,5 +40,12 @@ bool NSRLRepository::IsHashInDB(FilePtr File)
     }
     sqlite3_finalize(pStatement);
     // cout << to_string(n) << endl;
-    return (n > 0) ? true : false;
+    if (n > 0)
+    {
+        file->Is_nsrl_db = true;
+    }
+    else
+    {
+        file->Is_nsrl_db = false;
+    }
 }
