@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "sqlite3.h"
+#include "../../lib/sqlite3/sqlite3.h"
 
 using namespace std;
 
