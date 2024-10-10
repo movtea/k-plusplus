@@ -18,7 +18,7 @@ public:
     };
     NSRLRepository(string path);
     ~NSRLRepository() { sqlite3_close(Database); }; // закрытие бд
-    bool IsHashInDB(FilePtr File);
+    void IsHashInDB(FilePtr file);
 };
 
 typedef NSRLRepository *NSRLRepositoryPtr; // указатель на репозиторий
