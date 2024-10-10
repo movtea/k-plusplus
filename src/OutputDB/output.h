@@ -2,11 +2,14 @@
 #define OUTPUT_H
 #include "../../models/fileSchema.h"
 #include "sqlite3.h"
+#include "../nsrlRepository/nsrlRepository.h"
+#include "../getFileFromDir/getFileFromDir.h"
 
 class OutputDB
 {
     private:
      sqlite3 * DB;
+     NSRLRepository BIGBALL("test.db");
     public:
      OutputDB()
      {
