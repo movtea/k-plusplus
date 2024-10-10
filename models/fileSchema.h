@@ -11,6 +11,7 @@ struct File
     string hash_sha256;
     string hash_md5;
     string hash_crc32;
+    bool IsInDB;
 };
 
 /*

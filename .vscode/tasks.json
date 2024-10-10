@@ -11,6 +11,7 @@
 				"${workspaceFolder}/build/sqlite3.o",
 				"${workspaceFolder}/src/getFileFromDir/getFileFromDir.cpp",
 				"${workspaceFolder}/src/nsrlRepository/nsrlRepository.cpp",
+				"${workspaceFolder}/src/OutputDB/output.cpp",
 				"-o",
 				"${workspaceFolder}/build//${fileBasenameNoExtension}",
 				"-L${workspaceFolder}/lib/cryptopp/",
