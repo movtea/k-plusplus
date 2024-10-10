@@ -23,7 +23,7 @@ void OutputDB::FillTheDB(FilePtr ourfile)
         sqlite3_finalize(stmt);
     };
 };
-
+/*
 int main()
 {
     OutputDB OurDatabase;
@@ -38,4 +38,4 @@ int main()
     not_nsrl_file->path = "TEST_PATH";
     not_nsrl_file->IsInDB = false;
     OurDatabase.FillTheDB(not_nsrl_file);
-}
+}*/

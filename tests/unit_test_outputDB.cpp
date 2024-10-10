@@ -1,16 +1,23 @@
 #include <iostream>
-#include <vector>
 #include <string>
-#include "../src/getFileFromDir/getFileFromDir.h"
-#include "../src/OutputDB/output.h"
+#include "../src/OutputDB/outputDB.h"
+#include "../lib/sqlite3/sqlite3.h"
+#include "../models/fileSchema.h"
 
 using namespace std;
 
-int main(int argc, char const *argv[])
+int main()
 {
-    OutputDB testOutDB;
-    File testfilse;
-    testfilse.name = "Test";
+    OutputDB OurDatabase;
+    FilePtr nsrl_file = new File();
+    nsrl_file->hash_sha1 = "KNOWN_FILE_TEST_HASH";
+    nsrl_file->path = "KNOWN_FILE_TEST_PATH";
+    nsrl_file->IsInDB = true;
+    OurDatabase.FillTheDB(nsrl_file);
 
-    return 0;
-}
+    FilePtr not_nsrl_file = new File();
+    not_nsrl_file->hash_sha1 = "UNKNOWN_FILE_TEST_HASH";
+    not_nsrl_file->path = "UNKNOWN_FILE_TEST_PATH";
+    not_nsrl_file->IsInDB = false;
+    OurDatabase.FillTheDB(not_nsrl_file);
+};
