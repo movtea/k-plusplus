@@ -7,14 +7,14 @@
 
 class OutputDB
 {
-    private:
-     sqlite3 * DB;
-     NSRLRepository BIGBALL("test.db");
-    public:
-     OutputDB()
-     {
-        sqlite3_open("output.db");
-     };
-     void FillTheDB(FilePtr File){};
+private:
+   sqlite3 *DB;
+
+public:
+   OutputDB()
+   {
+      sqlite3_open("output.db", &DB);
+   };
+   void FillTheDB(FilePtr File);
 };
-#endif 
+#endif
