@@ -4,25 +4,26 @@
 using namespace std;
 void OutputDB::FillTheDB(FilePtr ourfile)
 {
-    if (ourfile->IsInDB == true)
+    if (ourfile->Is_nsrl_db == true)
     {
-        sqlite3_stmt* stmt;
-        string sql = "INSERT INTO KNOWN_FILES (HASH,PATH) VALUES ('"+ourfile->hash_sha1+"','"+ourfile->path+"');";
+        sqlite3_stmt *stmt;
+        string sql = "INSERT INTO KNOWN_FILES (NAME, HASH, PATH) VALUES ('" + ourfile->name + "','" + ourfile->hash_sha1 + "','" + ourfile->path + "');";
         cout << sql << "\n";
-        sqlite3_prepare_v2(DB, sql.c_str(), -1, &stmt, NULL);
+        int err = sqlite3_prepare_v2(DB, sql.c_str(), -1, &stmt, NULL);
         sqlite3_step(stmt);
         sqlite3_finalize(stmt);
     }
     else
     {
-        sqlite3_stmt* stmt;
-        string sql = "INSERT INTO UNKNOWN_FILES (HASH,PATH) VALUES ('"+ourfile->hash_sha1+"','"+ourfile->path+"');";
-        //cout << sql << "\n";
+        sqlite3_stmt *stmt;
+        string sql = "INSERT INTO UNKNOWN_FILES (NAME, HASH, PATH) VALUES ('" + ourfile->name + "', '" + ourfile->hash_sha1 + "','" + ourfile->path + "');";
+        // cout << sql << "\n";
         sqlite3_prepare_v2(DB, sql.c_str(), -1, &stmt, NULL);
         sqlite3_step(stmt);
         sqlite3_finalize(stmt);
     };
 };
+
 /*
 int main()
 {
