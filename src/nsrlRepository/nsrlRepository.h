@@ -1,4 +1,4 @@
-#include "sqlite3.h"
+#include "../../lib/sqlite3/sqlite3.h"
 #ifndef NSRLREPO_H_INCLUDED
 #define NSRLREPO_H_INCLUDED
 
