@@ -1,3 +1,0 @@
-/home/panzerfaust/Документы/proga/semen5/kursach/k-plusplus/tmp/CMakeFiles/test.dir
-/home/panzerfaust/Документы/proga/semen5/kursach/k-plusplus/tmp/CMakeFiles/edit_cache.dir
-/home/panzerfaust/Документы/proga/semen5/kursach/k-plusplus/tmp/CMakeFiles/rebuild_cache.dir
