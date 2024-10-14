@@ -24,7 +24,7 @@ void OutputDB::FillTheDB(FilePtr ourfile)
     };
 };
 
-
+/*
 int main()
 {
     OutputDB OurDatabase;
@@ -39,4 +39,4 @@ int main()
     not_nsrl_file->path = "TEST_PATH";
     not_nsrl_file->Is_nsrl_db = false;
     OurDatabase.FillTheDB(not_nsrl_file);
-}
+}*/
