@@ -31,5 +31,8 @@ add_library(calculateShaHash STATIC ${SOURCE_DIR}/calculateShaHash/calculateShaH
 target_link_libraries(calculateShaHash PRIVATE cryptopp)
 
 #сборка всего приложения
-add_executable(main ${SOURCE_DIR}/main.cpp)
-target_link_libraries(main calculateShaHash getFileFromDir nsrlRepository OutputDB)
+add_executable(k-pp ${SOURCE_DIR}/main.cpp)
+target_link_libraries(k-pp calculateShaHash getFileFromDir nsrlRepository OutputDB)
+
+#отправим собранное приложение в необходимую директорию
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR}/build)
