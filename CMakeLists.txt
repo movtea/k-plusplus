@@ -17,3 +17,11 @@ target_link_libraries(OutputDB sqlite3)
 # собираем nsrlrepo библиотеку
 add_library(nsrlRepository ${SOURCE_DIR}/nsrlRepository/nsrlRepository.cpp)
 target_link_libraries(nsrlRepository sqlite3)
+
+#компиляция getfilefromdir библиотеки
+add_library(getFileFromDir ${SOURCE_DIR}/getFileFromDir/getFileFromDir.cpp)
+
+#компиляция calculateshahash билиотеки
+add_library(calculateShaHash ${SOURCE_DIR}/calculateShaHash/calculateShaHash.cpp)
+target_link_libraries(calculateShaHash ${LIB_DIR}/cryptopp/libcryptopp.a)
+
