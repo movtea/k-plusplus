@@ -24,19 +24,19 @@ void OutputDB::FillTheDB(FilePtr ourfile)
     };
 };
 
-/*
+
 int main()
 {
     OutputDB OurDatabase;
     FilePtr nsrl_file = new File();
     nsrl_file->hash_sha1 = "TEST_HASH";
     nsrl_file->path = "TEST_PATH";
-    nsrl_file->IsInDB = true;
+    nsrl_file->Is_nsrl_db = true;
     OurDatabase.FillTheDB(nsrl_file);
 
     FilePtr not_nsrl_file = new File();
     not_nsrl_file->hash_sha1 = "TEST_HASH";
     not_nsrl_file->path = "TEST_PATH";
-    not_nsrl_file->IsInDB = false;
+    not_nsrl_file->Is_nsrl_db = false;
     OurDatabase.FillTheDB(not_nsrl_file);
-}*/
+}
