@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.30)
+cmake_minimum_required(VERSION 3.10)
 
 project(k-pp)
 #add_executable(test ./src/OutputDB/outputDB.cpp)
@@ -6,6 +6,16 @@ project(k-pp)
 # задаем директории исходников и библиотек
 set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
 set(LIB_DIR ${CMAKE_SOURCE_DIR}/lib)
+
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/toolchains/windows.txt)
+    message(STATUS "Compiling for Windows")
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    message(STATUS "Compiling for Linux")
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    message(STATUS "Compiling for MacOS")
+    set(CMAKE_TOOLCHAIN_FILE ${CMAKE_SOURCE_DIR}/toolchains/macos.cmake)
+endif()
 
 #собираем sqlite3
 add_library(sqlite3 STATIC ${LIB_DIR}/sqlite3/sqlite3.c)
