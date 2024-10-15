@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(k-pp)
+project(kpp)
 #add_executable(test ./src/OutputDB/outputDB.cpp)
 
 # задаем директории исходников и библиотек
