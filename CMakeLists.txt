@@ -32,9 +32,11 @@ target_link_libraries(nsrlRepository sqlite3)
 add_library(getFileFromDir STATIC ${SOURCE_DIR}/getFileFromDir/getFileFromDir.cpp)
 
 #добавление cryptopp
-add_library(cryptopp STATIC IMPORTED)
-set_property(TARGET cryptopp PROPERTY
-             IMPORTED_LOCATION ${LIB_DIR}/cryptopp/cryptopp.a)
+#add_library(cryptopp STATIC IMPORTED)
+#set_property(TARGET cryptopp PROPERTY
+#ls             IMPORTED_LOCATION ${LIB_DIR}/cryptopp/cryptlib.lib)
+
+add_subdirectory(${LIB_DIR}/cryptopp-cmake)
 
 #компиляция calculateshahash билиотеки
 add_library(calculateShaHash STATIC ${SOURCE_DIR}/calculateShaHash/calculateShaHash.cpp)
