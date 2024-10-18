@@ -1,7 +1,11 @@
+#требуемая cmake версия
 cmake_minimum_required(VERSION 3.10)
 
+#требуемый стандарт C++
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
 project(kpp)
-#add_executable(test ./src/OutputDB/outputDB.cpp)
 
 # задаем директории исходников и библиотек
 set(SOURCE_DIR ${CMAKE_SOURCE_DIR}/src)
