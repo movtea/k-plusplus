@@ -2,29 +2,45 @@
 #include <iostream>
 #include <filesystem>
 #include <vector>
+#include <fstream>
 
 using namespace std;
+using namespace filesystem;
 
 #include "../../models/fileSchema.h"
 #include "getFileFromDir.h"
-
-namespace fs = filesystem;
 
 vector<FilePtr> getFileFromDir(string path)
 {
     vector<FilePtr> result;
 
-    for (const auto &dirEntry : fs::recursive_directory_iterator(path))
+    try
     {
-        if (!fs::is_directory(dirEntry.path()))
+        for (const auto &dirEntry : recursive_directory_iterator(path))
         {
-            FilePtr file = new File();
-            std::filesystem::path path_from_dir = dirEntry.path();
-            file->path = path_from_dir.string();
-            std::filesystem::path filename_from_dir = dirEntry.path().filename();
-            file->name = filename_from_dir.string();
-            result.push_back(file);
+            string filePath = dirEntry.path();
+            string fileName = dirEntry.path().filename();
+
+            if (!is_directory(dirEntry) && exists(dirEntry) && !is_block_file(dirEntry) && (temp_directory_path() != filePath))
+            {
+                ifstream IsFileOpen(filePath);
+
+                if (!IsFileOpen.is_open())
+                {
+                    cerr << "Не удалось открыть файл (permisson denied): " << filePath << endl;
+                    continue;
+                }
+
+                FilePtr file = new File();
+                file->path = filePath;
+                file->name = fileName;
+                result.push_back(file);
+            }
         }
+    }
+    catch (const filesystem_error &e)
+    {
+        cerr << "Ошибка filesystem: " << e.what() << endl;
     }
     return result;
 }
