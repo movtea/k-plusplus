@@ -18,8 +18,8 @@ vector<FilePtr> getFileFromDir(string path)
     {
         for (const auto &dirEntry : recursive_directory_iterator(path))
         {
-            string filePath = dirEntry.path();
-            string fileName = dirEntry.path().filename();
+            std::filesystem::path filePath = dirEntry.path();
+            std::filesystem::path fileName = dirEntry.path().filename();
 
             if (!is_directory(dirEntry) && exists(dirEntry) && !is_block_file(dirEntry) && (temp_directory_path() != filePath))
             {
@@ -32,8 +32,8 @@ vector<FilePtr> getFileFromDir(string path)
                 }
 
                 FilePtr file = new File();
-                file->path = filePath;
-                file->name = fileName;
+                file->path = filePath.string();
+                file->name = fileName.string();
                 result.push_back(file);
             }
         }
