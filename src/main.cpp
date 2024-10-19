@@ -13,8 +13,8 @@ using namespace std;
 int main(int argc, char const *argv[])
 {
     // setlocale(LC_ALL, "Russian");
-    vector<FilePtr> filename = getFileFromDir("/home/dmitriy/CLionProjects/k-plusplus/tests");
-    NSRLRepository nsrlRepo = NSRLRepository("./nsrlRepository/test.db");
+    vector<FilePtr> filename = getFileFromDir("../tests");
+    NSRLRepository nsrlRepo = NSRLRepository("../src/nsrlRepository/test.db");
     OutputDB ourDatabase;
 
     for (int i = 0; i < filename.size(); i++)

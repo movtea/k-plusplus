@@ -19,8 +19,10 @@ vector<FilePtr> getFileFromDir(string path)
         if (!fs::is_directory(dirEntry.path()))
         {
             FilePtr file = new File();
-            file->path = dirEntry.path();
-            file->name = dirEntry.path().filename();
+            std::filesystem::path path_from_dir = dirEntry.path();
+            file->path = path_from_dir.string();
+            std::filesystem::path filename_from_dir = dirEntry.path().filename();
+            file->name = filename_from_dir.string();
             result.push_back(file);
         }
     }
