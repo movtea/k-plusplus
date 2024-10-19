@@ -1,0 +1,28 @@
+# toolchain-mingw-windows.cmake
+
+# Указываем, что целевая система — Windows
+set(CMAKE_SYSTEM_NAME Windows)
+set(CMAKE_SYSTEM_PROCESSOR x86_64)
+
+# Автоматически ищем компиляторы MinGW в системных путях
+find_program(CMAKE_C_COMPILER x86_64-w64-mingw32-gcc)
+find_program(CMAKE_CXX_COMPILER x86_64-w64-mingw32-g++)
+#find_program(CMAKE_RC_COMPILER x86_64-w64-mingw32-windres)  # Ресурсный компилятор для Windows
+
+# Если компиляторы не найдены, выводим ошибку
+if(NOT CMAKE_C_COMPILER)
+    message(FATAL_ERROR "MinGW C compiler not found! Please install MinGW and ensure it's in your PATH.")
+endif()
+
+if(NOT CMAKE_CXX_COMPILER)
+    message(FATAL_ERROR "MinGW C++ compiler not found! Please install MinGW and ensure it's in your PATH.")
+endif()
+
+# Указываем флаги для компиляции
+set(CMAKE_C_FLAGS_INIT "-static-libgcc -static-libstdc++")
+set(CMAKE_CXX_FLAGS_INIT "-static-libgcc -static-libstdc++")
+
+# Указываем, что собираем для Windows и используем MinGW библиотеки
+set(CMAKE_FIND_ROOT_PATH_MODE_PROGRAM NEVER)
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)

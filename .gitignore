@@ -3,3 +3,4 @@ build
 lib/cryptopp/libcryptopp.a
 src/OutputDB/1
 tests/output.db
+tmp
