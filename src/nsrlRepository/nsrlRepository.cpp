@@ -8,9 +8,11 @@ using namespace std;
 
 NSRLRepository::NSRLRepository(string path)
 {
-    int openResult = sqlite3_open(
+    int openResult = sqlite3_open_v2(
         path.c_str(), // путь к файлу бд
-        &Database);   // открытие бд и передача имени бд open - имя указывается в кодировке
+        &Database,
+        SQLITE_OPEN_READWRITE,
+        NULL);   // открытие бд и передача имени бд open - имя указывается в кодировке
 
     if (openResult != SQLITE_OK)
     {
