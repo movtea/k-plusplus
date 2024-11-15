@@ -8,6 +8,7 @@
 #include "../../lib/sqlite3/sqlite3.h"
 #include "../../models/fileSchema.h"
 #include <iostream>
+#include <filesystem>
 
 using namespace std;
 
@@ -18,11 +19,22 @@ class OutputDB
 {
 private:
     sqlite3 *DB;
+    class OutputDBException // Для проброса ошибок открытия БД
+    {
+    public:
+        int error;
+        string messages;
+        OutputDBException(string Messages, int Error) { error = Error; messages = Messages;};
+    };
 
 public:
-    OutputDB(string path)
+    OutputDB(filesystem::path path)
     {
-        int err = sqlite3_open((path).c_str(), &DB);
+        int err = sqlite3_open(path.string().c_str(), &DB);
+        if (err != SQLITE_OK)
+        {
+            throw OutputDBException("Output db Open error: ", err);
+        }
         string create_known_table = "CREATE TABLE IF NOT EXISTS KNOWN_FILES ("
                                     "ID INTEGER PRIMARY KEY AUTOINCREMENT,"
                                     "NAME TEXT,"
@@ -37,7 +49,7 @@ public:
                                       ");";
         if (err != SQLITE_OK)
         {
-            cerr << "Ошибка открытия: " << err << endl;
+            cerr << "Opening error: " << err << endl;
         }
         string delete_known_table = "DELETE FROM KNOWN_FILES;";
         string delete_unknown_table = "DELETE FROM UNKNOWN_FILES;";

@@ -16,21 +16,15 @@ class NSRLRepository
 private:
     sqlite3 *Database;
 
-    static int callback(void *count, int argc, char **argv, char **azColName)
-    {
-        int *c = (int *)count;
-        *c = atoi(argv[0]);
-        return 0;
-    }
-
 public:
-    class OpenDBException // Для проброса ошибок открытия БД
+    class NSRLDBException // Для проброса ошибок открытия БД
     {
     public:
         int error;
-        OpenDBException(int Error) { error = Error; };
+        string messages;
+        NSRLDBException(string Messages, int Error) { error = Error; messages = Messages;};
     };
-    NSRLRepository(string path);
+    NSRLRepository(filesystem::path path);
     ~NSRLRepository() { sqlite3_close(Database); }; // закрытие бд
     /**
      * Функция считывания хэша из базы NSRL

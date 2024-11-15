@@ -21,7 +21,7 @@ using namespace std;
 Application::Application(int argc, const char **argv)
 {
     // Добавляем пункты меню
-    m_desc.add_options()("help,h", "Вывести справку")("nsrl-db-path,r", po::value<filesystem::path>(&m_inputDBPath)->composing(), "задать путь до базы nsrl")("scan-dir,s", po::value<filesystem::path>(&m_scanDirPath)->composing(), "задать папку для сканирования")("output-db-path,o", po::value<filesystem::path>(&m_outputDBPath)->composing(), "задать путь до база ответа")("output-db-name,n", po::value<filesystem::path>(&m_outputDBPath)->composing(), "задать название для базы ответа");
+    m_desc.add_options()("help,h", "Print the help")("nsrl-db-path,r", po::value<filesystem::path>(&m_inputDBPath)->composing(), "set the path to the nsrl database")("scan-dir,s", po::value<filesystem::path>(&m_scanDirPath)->composing(), "set the folder to scan")("output-db-path,o", po::value<filesystem::path>(&m_outputDBPath)->composing(), "set the path to the response base")("output-db-name,n", po::value<filesystem::path>(&m_outputDBPath)->composing(), "set a name for the response database");
     po::store(po::parse_command_line(argc, argv, m_desc), m_vm); // парсим переданные аргументы
     po::notify(m_vm);                                            // записываем аргументы в переменные в программе
 }
@@ -42,33 +42,54 @@ int Application::exec()
     if (!m_vm.count("scan-dir"))
     {
         // То выводим описание меню
-        cout << "Введите параметр scan-dir" << endl;
-        return -1;
+        cout << "\033[93m" << "Enter the scan-dir parameter" << "\033[0m" << endl;
+        return 1;
     }
 
     if (!m_vm.count("nsrl-db-path"))
     {
-        cout << "\033[93m" << "Параметр nsrl-db-path не введён." << "\033[0m" << " Используется не полная тестовая бд nsrl" << endl;
-        m_inputDBPath = "../src/nsrlRepository/test.db";
+        cout << "\033[93m" << "nsrl-db-path parameter is not defined." << "\033[0m" << endl;
+        return 1;
     }
 
+    NSRLRepository* nsrlRepo;
+    OutputDB* ourDatabase;
     vector<FilePtr> filename = getFileFromDir(m_scanDirPath);               // Рекурсивный обход указанной директории
-    NSRLRepository nsrlRepo = NSRLRepository(m_inputDBPath);                // Инициализация NSRL репозитория
-    OutputDB ourDatabase = OutputDB(m_outputDBPath.append(m_outputDBName)); // Создание выходных баз данных
+    try {
+        nsrlRepo = new NSRLRepository(m_inputDBPath);                // Инициализация NSRL репозитория
+        ourDatabase = new OutputDB(m_outputDBPath.append(m_outputDBName)); // Создание выходных баз данных
+    }
+    catch (const NSRLRepository::NSRLDBException &ex)
+    {
+        cout << ex.messages << ex.error << endl;
+        delete nsrlRepo;
+        delete ourDatabase;
+        return 1;
+    }
+    
 
     int j = 0;
     for (int i = 0; i < filename.size(); i++)
     {
-
-        future<void> a1 = async([filename, i]                         // Анализ контрольной суммы файла
+        try {
+            future<void> a1 = async([filename, i]                         // Анализ контрольной суммы файла
                                 { CalculateSHA1Hash(filename[i]); }); // Подсчет хеша
-        a1.wait();
-        future<void> a2 = async([&nsrlRepo, filename, i]
-                                { nsrlRepo.IsHashInDB(filename[i]); });
-        a2.wait();
-        ourDatabase.FillTheDB(filename[i]); // Заполнение баз данных
+            a1.wait();
+            future<void> a2 = async([&nsrlRepo, filename, i]
+                                    { nsrlRepo->IsHashInDB(filename[i]); });
+            a2.wait();
+            ourDatabase->FillTheDB(filename[i]); // Заполнение баз данных
+        }catch (const NSRLRepository::NSRLDBException &ex)
+        {
+            cout << ex.messages << ex.error << endl;
+            delete nsrlRepo;
+            delete ourDatabase;
+            return 1;
+        }
     }
 
     filename.clear();
+    delete nsrlRepo;
+    delete ourDatabase;
     return 0;
 }

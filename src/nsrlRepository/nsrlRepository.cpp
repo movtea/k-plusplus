@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <filesystem>
 #include "../../lib/sqlite3/sqlite3.h"
 
 using namespace std;
@@ -10,17 +11,17 @@ using namespace std;
  * Открытие базы данных (Конструктор)
  * @param [in] path Путь к базе NSRL
  */
-NSRLRepository::NSRLRepository(string path)
+NSRLRepository::NSRLRepository(filesystem::path path)
 {
     int openResult = sqlite3_open_v2(
-        path.c_str(),
+        path.string().c_str(),
         &Database,
         SQLITE_OPEN_READWRITE,
         NULL); // открытие бд и передача имени бд open - имя указывается в кодировке
 
     if (openResult != SQLITE_OK)
     {
-        throw OpenDBException(openResult);
+        throw NSRLDBException("NSRL db Open error: ", openResult);
     }
 }
 
@@ -40,7 +41,12 @@ void NSRLRepository::IsHashInDB(FilePtr file)
                                         &pStatement,
                                         NULL);
 
+    if (execResult != 0) {
+        throw NSRLDBException("NSRL db error SELECT: ", execResult);
+    }
+
     execResult = sqlite3_step(pStatement);
+
     int n = 0;
     if (execResult == SQLITE_ROW)
     {
