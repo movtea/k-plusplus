@@ -35,7 +35,7 @@ void NSRLRepository::IsHashInDB(FilePtr file)
         SELECT count(*) FROM FILE WHERE sha1 = "7691C372B3C494671218EE5C8C56A6D7C53815B7";
     */
     int execResult = sqlite3_prepare_v2(Database,
-                                        ("SELECT EXISTS (SELECT 1 FROM FILE WHERE sha1 = \"" + file->hash_sha1 + "\"); ").c_str(), // запрос
+                                        ("SELECT EXISTS (SELECT 1 FROM FILE WHERE sha256 = \"" + file->hash_sha1 + "\"); ").c_str(), // запрос
                                         -1,                                                                                        // длина SQL-запроса в символах
                                         &pStatement,
                                         NULL);

@@ -15,13 +15,13 @@ using namespace CryptoPP;
 
 void CalculateSHA1Hash(FilePtr file)
 {
-    SHA1 sha1;
+    SHA256 sha256;
     string hash;
 
     try
     {
         FileSource fileSource(file->path.c_str(), true,
-                              new HashFilter(sha1,
+                              new HashFilter(sha256,
                                              new HexEncoder(
                                                  new StringSink(hash))));
         file->hash_sha1 = hash;
