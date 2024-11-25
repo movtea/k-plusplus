@@ -17,7 +17,7 @@ using namespace filesystem;
 vector<FilePtr> getFileFromDir(filesystem::path path)
 {
     vector<FilePtr> result;
-    for (const auto &dirEntry : recursive_directory_iterator(path))
+    for (const auto &dirEntry : recursive_directory_iterator(path, directory_options::skip_permission_denied))
     {
         filesystem::path filePath = dirEntry.path();
         filesystem::path fileName = dirEntry.path().filename();
